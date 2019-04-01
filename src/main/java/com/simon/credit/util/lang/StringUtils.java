@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 字符串处理工具类
  */
-public class StringUtil {
+public class StringUtils {
 
     /** 空字符串。 */
     public static final String EMPTY_STRING = "";
@@ -1421,7 +1421,7 @@ public class StringUtil {
          * Parse sentence。
          */
         public String parse(String str) {
-            if (StringUtil.isEmpty(str)) {
+            if (StringUtils.isEmpty(str)) {
                 return str;
             }
 

@@ -26,7 +26,7 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import com.simon.credit.util.lang.StringUtil;
+import com.simon.credit.util.lang.StringUtils;
 
 /**
  * HTTP工具类
@@ -219,11 +219,11 @@ public class WJHttpUtils {
 
     private static URL buildGetUrl(String strUrl, String query) throws IOException {
         URL url = new URL(strUrl);
-        if (StringUtil.isEmpty(query)) {
+        if (StringUtils.isEmpty(query)) {
             return url;
         }
 
-        if (StringUtil.isEmpty(url.getQuery())) {
+        if (StringUtils.isEmpty(url.getQuery())) {
             if (strUrl.endsWith("?")) {
                 strUrl = strUrl + query;
             } else {
@@ -253,7 +253,7 @@ public class WJHttpUtils {
             String name = entry.getKey();
             String value = entry.getValue();
             // 忽略参数名或参数值为空的参数
-            if (StringUtil.isNotEmpty(name)) {
+            if (StringUtils.isNotEmpty(name)) {
                 if (hasParam) {
                     query.append("&");
                 } else {
@@ -274,7 +274,7 @@ public class WJHttpUtils {
             return getStreamAsString(conn.getInputStream(), charset);
         } else {
             String msg = getStreamAsString(es, charset);
-            if (StringUtil.isEmpty(msg)) {
+            if (StringUtils.isEmpty(msg)) {
                 throw new IOException(conn.getResponseCode() + ":" + conn.getResponseMessage());
             } else {
                 throw new IOException(msg);
@@ -304,14 +304,14 @@ public class WJHttpUtils {
     private static String getResponseCharset(String ctype) {
         String charset = DEFAULT_CHARSET;
 
-        if (!StringUtil.isEmpty(ctype)) {
+        if (!StringUtils.isEmpty(ctype)) {
             String[] params = ctype.split(";");
             for (String param : params) {
                 param = param.trim();
                 if (param.startsWith("charset")) {
                     String[] pair = param.split("=", 2);
                     if (pair.length == 2) {
-                        if (!StringUtil.isEmpty(pair[1])) {
+                        if (!StringUtils.isEmpty(pair[1])) {
                             charset = pair[1].trim();
                         }
                     }
@@ -352,7 +352,7 @@ public class WJHttpUtils {
      */
     public static String decode(String value, String charset) {
         String result = null;
-        if (!StringUtil.isEmpty(value)) {
+        if (!StringUtils.isEmpty(value)) {
             try {
                 result = URLDecoder.decode(value, charset);
             } catch (IOException e) {
@@ -371,7 +371,7 @@ public class WJHttpUtils {
      */
     public static String encode(String value, String charset) {
         String result = null;
-        if (!StringUtil.isEmpty(value)) {
+        if (!StringUtils.isEmpty(value)) {
             try {
                 result = URLEncoder.encode(value, charset);
             } catch (IOException e) {
