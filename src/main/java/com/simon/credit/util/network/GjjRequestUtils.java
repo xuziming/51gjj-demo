@@ -99,7 +99,17 @@ public class GjjRequestUtils {
 
 		// 获取响应入参 JSONObject
 		JSONObject responseJson = JSON.parseObject(response);
-		return decodeParam(responseJson);
+		System.out.println("=== responseJson: " + responseJson);
+
+		if (isLogicOk(responseJson)) {
+			return decodeParam(responseJson);
+		} else {
+			return responseJson;
+		}
+	}
+
+	private static boolean isLogicOk(JSONObject response) {
+		return response.containsKey("content") && response.containsKey("sign");
 	}
 
 	public static JSONObject getResponse(JSONObject param) {
