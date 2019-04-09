@@ -41,9 +41,9 @@ public class OpenApiInvoker {
 		paramJson.put("phone_id_md5", "46415fb12f05f96cf9e8956ceebb07b2");
 
 		// 2.1前置检测接口(开放平台必须配置开放服务method: gjj.credit.checkUser, 否则会报参数异常)
-		String url  = "https://openapitest.to$$u$$na.cn/gateway/gjj/gjj.credit.checkUser";
+		// String url  = "https://openapitest.to$$u$$na.cn/gateway/gjj/gjj.credit.checkUser";
 		// String url  = "http://10.0.4.137:8443/gateway/gjj/gjj.credit.checkUser";
-		// String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.checkUser";
+		String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.checkUser";
 
 		// 发送请求
 		JSONObject response = GjjRequestUtils.sendRequest(parseCorrectUrl(url), paramJson);
