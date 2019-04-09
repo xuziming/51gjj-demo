@@ -70,9 +70,9 @@ public class OpenApiInvoker {
 		paramJson.put("return_url"	, "https://kaifa.jianbing.com/pt?apply_id=1111&loan_no=2222");
 
 		// 2.12.9.2获取合作方还款页面URL接口(开放平台必须配置开放服务method: gjj.credit.getRepayUrl, 否则会报参数异常)
-		// String url  = "https://openapitest.to$$u$$na.cn/gateway/gjj/gjj.credit.getRepayUrl";
+		String url  = "https://openapitest.to$$u$$na.cn/gateway/gjj/gjj.credit.getRepayUrl";
 		// String url  = "http://10.0.4.137:8443/gateway/gjj/gjj.credit.getRepayUrl";
-		String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.getRepayUrl";
+		// String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.getRepayUrl";
 
 		// 发送请求
 		JSONObject response = GjjRequestUtils.sendRequest(parseCorrectUrl(url), paramJson);
@@ -104,11 +104,6 @@ public class OpenApiInvoker {
 		System.out.println("response: " + response);// 解密后的明文
 	}
 
-	/**
-	 * 防止公司进行github关键字检测
-	 * @param url
-	 * @return
-	 */
 	private static String parseCorrectUrl(String url) {
 		return StringUtils.replace(url, "$$", "");
 	}
