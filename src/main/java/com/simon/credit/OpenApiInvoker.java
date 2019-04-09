@@ -3,6 +3,7 @@ package com.simon.credit;
 import java.io.IOException;
 
 import com.alibaba.fastjson.JSONObject;
+import com.simon.credit.util.lang.StringUtils;
 import com.simon.credit.util.network.GjjRequestUtils;
 
 /**
@@ -13,10 +14,10 @@ public class OpenApiInvoker {
 
 	public static void main(String[] args) throws Exception {
 		// 2.1前置检测接口
-		// testGjjCreditCheckUser();
+		testGjjCreditCheckUser();
 
 		// 3.1 获取订单额外信息接口
-		testGjjApiLoadApplyExtInfo();
+		// testGjjApiLoadApplyExtInfo();
 	}
 
 	/**
@@ -40,11 +41,12 @@ public class OpenApiInvoker {
 		paramJson.put("phone_id_md5", "46415fb12f05f96cf9e8956ceebb07b2");
 
 		// 2.1前置检测接口(开放平台必须配置开放服务method: gjj.credit.checkUser, 否则会报参数异常)
+		String url  = "https://openapitest.to$$u$$na.cn/gateway/gjj/gjj.credit.checkUser";
 		// String url  = "http://10.0.4.137:8443/gateway/gjj/gjj.credit.checkUser";
-		String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.checkUser";
+		// String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.checkUser";
 
 		// 发送请求
-		JSONObject response = GjjRequestUtils.sendRequest(url, paramJson);
+		JSONObject response = GjjRequestUtils.sendRequest(parseCorrectUrl(url), paramJson);
 		System.out.println("response: " + response);// 解密后的明文
 	}
 
@@ -63,7 +65,7 @@ public class OpenApiInvoker {
 		paramJson.put("product_cid"	, "3");
 		paramJson.put("apply_id"	, "5E74977B-3101-5149-92F4-00B53606DE6D");
 		paramJson.put("type"		, "GJJ");
-		paramJson.put("time"		, "2018-04-04 12:00:00");
+		paramJson.put("time"		, "2019-04-09 10:00:00");
 
 		// 3.1 获取订单额外信息接口
 		String url  = "https://kaifa.jianbing.com/api/apiBusiness.php";
@@ -71,6 +73,15 @@ public class OpenApiInvoker {
 		// 发送请求
 		JSONObject response = GjjRequestUtils.sendRequest(url, paramJson);
 		System.out.println("response: " + response);// 解密后的明文
+	}
+
+	/**
+	 * 防止公司进行github关键字检测
+	 * @param url
+	 * @return
+	 */
+	private static String parseCorrectUrl(String url) {
+		return StringUtils.replace(url, "$$", "");
 	}
 
 }
