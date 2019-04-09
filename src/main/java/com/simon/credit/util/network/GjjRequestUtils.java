@@ -36,7 +36,7 @@ public class GjjRequestUtils {
 		try {
 			// 加密部分demo
 			// 从字符串中得到公钥
-			PublicKey publicKey = RSAUtils.loadPublicKey(TN_PUBLIC_KEY);// 投哪公钥加密
+			PublicKey publicKey = RSAUtils.loadPublicKey(TN_PUBLIC_KEY);// 投$$哪公钥加密
 
 			byte[] encryptByte = RSAUtils.encryptData(source.getBytes(), publicKey);
 
@@ -67,7 +67,7 @@ public class GjjRequestUtils {
 		String signStr = data.getString("sign");
 
 		try {
-			// 投哪公钥解签
+			// 投$$哪公钥解签
 			PublicKey publicKey = RSAUtils.loadPublicKey(TN_PUBLIC_KEY);
 
 			// 验签
