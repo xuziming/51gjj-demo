@@ -31,7 +31,7 @@ import com.simon.credit.util.lang.StringUtils;
 /**
  * HTTP工具类
  */
-public class WJHttpUtils {
+public class TNHttpUtils {
 
     private static final String     DEFAULT_CHARSET = "UTF8";
     private static final String     METHOD_POST     = "POST";
@@ -82,7 +82,7 @@ public class WJHttpUtils {
 
     }
 
-    private WJHttpUtils() {
+    private TNHttpUtils() {
     }
 
     /**

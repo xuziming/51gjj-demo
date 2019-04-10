@@ -101,7 +101,7 @@ public class GjjRequestUtils {
 
 		Map<String, String> params = 
 			JSON.parseObject(requestParam.toJSONString(), new TypeReference<Map<String, String>>() {});
-		String response = WJHttpUtils.doPost(url, params, 5000, 10000);
+		String response = TNHttpUtils.doPost(url, params, 5000, 10000);
 
 		// 获取响应入参 JSONObject
 		JSONObject responseJson = JSON.parseObject(response);

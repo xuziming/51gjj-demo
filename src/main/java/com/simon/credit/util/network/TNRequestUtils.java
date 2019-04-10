@@ -99,7 +99,7 @@ public class TNRequestUtils {
 
 		Map<String, String> params = JSON.parseObject(requestParam.toJSONString(), new TypeReference<Map<String, String>>() {});
 		// String response = HttpUtil.doPost(url, params, 5000, 10000);
-		String response = WJHttpUtils.doPost(url, params, 5000, 10000);
+		String response = TNHttpUtils.doPost(url, params, 5000, 10000);
 		System.out.println("响应字符串：" + response);
 
 		// 获取响应入参 JSONObject
