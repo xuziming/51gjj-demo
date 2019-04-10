@@ -14,7 +14,7 @@ import com.simon.credit.util.rsa.RSAUtils;
  * 51公积金参数编解码器
  * @author XUZIMING 2019-03-31
  */
-public class TounaRequestUtils {
+public class TNRequestUtils {
 
 	private final static String TN_PRIVATE_KEY = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAKe7B1EftzOGIwxvCvV3MozibvrUXg4WdjgSdUokoYgDSu8q+TNOkgdv9guA9rQi4a15zUFOTHyE2ev695mPD7geguzlPlKXgWz3tbyeBjH2J/3CKebLMyFf/lfpwH92u+UzT6D+GaVvvt19C/kSmb1dywas3yRfY7oVay4FOlh1AgMBAAECgYBIjzkgGAdJy8pXs6XbAICmv8Hg0oQJth/YK+v/cg9K5pnBEycQ0fmMLBwVZ+nRjZFxWVK44KVn7JTVaBE6pc/XU/moKDS0Ljd1QtReTDxNU0M/Og2vQmhencrI+NZcty206caK61keAgB+wgRWJMOJ9LS6d09jFjKLcEn+lwba4QJBAN0irXgN4MnPMICb4TQ9QkGwiVrsxz9CkSLkFCV3LvjEheDeWXKl40beTg6XGzkph6PlekfyvJcNcqJzt8ZyhV0CQQDCLNvW79fEZiE/SsBmaVNAfATwOoUVmau26L04GQu+jTpSujJfBFH0vEERQq/zX9d0SjNVlVjJvW2gxS1CHhX5AkEA2j9EZ22DAooq+3NdI7ql7sE1/vgbebLQHVhvDb8AK+OBojqwmzdgBWyYK0w1QQhc54QvWF0YhhhuoCiHIyOZvQJARxlf4gLucbanw+IeMyGr3zfKIyB6bJ9ZNd9gsbLSDxLtYS9WlF4jmEZ6WNSfUrEsViN5SoQl/7DB/JVWbhhQGQJAeXZB2bkD3DKFlopiU9C1vDxzay79xfitEDQ05pI6kW0fSjYeolRvzQ/LoYPiD+0dSDVGASsfKOpR4NOLa/yepw==";
 	@SuppressWarnings("unused")
@@ -31,7 +31,7 @@ public class TounaRequestUtils {
 	 * 组装HTTP请求的入参
 	 * @return
 	 */
-	public static JSONObject tounaEncodeParam(JSONObject paramJson) throws Exception {
+	public static JSONObject tnEncodeParam(JSONObject paramJson) throws Exception {
 		// HTTP请求入参组装
 		JSONObject data = new JSONObject();
 		// 业务参数JSON字符串组装
@@ -63,7 +63,7 @@ public class TounaRequestUtils {
 	 * @param data HTTP请求入参
 	 * @return
 	 */
-	public static JSONObject tounaDecodeParam(JSONObject data) throws Exception {
+	public static JSONObject tnDecodeParam(JSONObject data) throws Exception {
 		String encryptText = data.getString("content");
 		String sign = data.getString("sign");
 
@@ -91,8 +91,8 @@ public class TounaRequestUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static JSONObject tounaSendRequest(String url, JSONObject paramJSON) throws Exception {
-		JSONObject requestParam = tounaEncodeParam(paramJSON);
+	public static JSONObject tnSendRequest(String url, JSONObject paramJSON) throws Exception {
+		JSONObject requestParam = tnEncodeParam(paramJSON);
 		// TODO 此处值为示例，具体值由51公积金提供
 		requestParam.put("product_cid", "3");
 		System.out.println("请求JSON：" + requestParam);
@@ -107,7 +107,7 @@ public class TounaRequestUtils {
 		System.out.println("响应JSON：" + responseJson);
 
 		if (isLogicOk(responseJson)) {
-			return tounaDecodeParam(responseJson);
+			return tnDecodeParam(responseJson);
 		} else {
 			return responseJson;
 		}
@@ -122,9 +122,9 @@ public class TounaRequestUtils {
 	 * @param param 待返回的明文参数信息
 	 * @return
 	 */
-	public static JSONObject tounaEncodeResponse(JSONObject param) {
+	public static JSONObject tnEncodeResponse(JSONObject param) {
 		try {
-			return tounaEncodeParam(param);
+			return tnEncodeParam(param);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

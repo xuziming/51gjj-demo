@@ -3,7 +3,7 @@ package com.simon.credit;
 import java.io.IOException;
 
 import com.alibaba.fastjson.JSONObject;
-import com.simon.credit.util.network.TounaRequestUtils;
+import com.simon.credit.util.network.TNRequestUtils;
 
 /**
  * 51公积金开放接口调用
@@ -38,7 +38,7 @@ public class GJJOpenApiInvoker {
 		String url  = "https://kaifa.jianbing.com/api/apiBusiness.php";
 
 		// 发送请求
-		JSONObject response = TounaRequestUtils.tounaSendRequest(url, paramJson);
+		JSONObject response = TNRequestUtils.tnSendRequest(url, paramJson);
 		System.out.println("response: " + response);// 解密后的明文
 	}
 
