@@ -1,12 +1,10 @@
 package com.simon.credit;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
 import com.simon.credit.util.lang.StringUtils;
-import com.simon.credit.util.network.TNHttpUtils;
+import com.simon.credit.util.network.HttpRequest;
 import com.simon.credit.util.network.TNRequestUtils;
 
 /**
@@ -18,8 +16,8 @@ public class GJJOpenApiInvoker {
 
 	public static void main(String[] args) throws Exception {
 		// 3.1 获取订单额外信息接口
-		testGjjApiLoadApplyExtInfoMethod1();
-		// testGjjApiLoadApplyExtInfoMethod2();
+		// testGjjApiLoadApplyExtInfoMethod1();
+		testGjjApiLoadApplyExtInfoMethod2();
 	}
 
 	/**
@@ -57,21 +55,22 @@ public class GJJOpenApiInvoker {
 	 * @throws IOException
 	 */
 	public static void testGjjApiLoadApplyExtInfoMethod2() throws Exception {
-		Map<String, String> paramJson = new HashMap<String, String>(8);
+		JSONObject paramJson = new JSONObject();
 
 		paramJson.put("f"			, "load_apply_ext_info");
 		paramJson.put("product_cid"	, "132");
-		paramJson.put("apply_id"	, "5E74977B-3101-5149-92F4-00B53606DE6D");
+		paramJson.put("apply_id"	, "361706398");
 		paramJson.put("type"		, "GJJ");
-		paramJson.put("time"		, "2019-04-09 10:00:00");
+		paramJson.put("time"		, "2019-04-12 10:00:00");
 
 		// 3.1 获取订单额外信息接口
 		// String url  = "https://kaifa.jianbing.com/api/apiBusiness.php";
-		// String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.loadApplyExtInfo";
-		String url  = "https://openapitest.to$$un$$a.cn/gateway/gjj/gjj.credit.loadApplyExtInfo";
+		String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.loadApplyExtInfo";
+		// String url  = "https://openapitest.to$$un$$a.cn/gateway/gjj/gjj.credit.loadApplyExtInfo";
 
 		// 发送请求
-		String response = TNHttpUtils.doPost(parseCorrectUrl(url), paramJson, 5000, 10000);
+		String response = HttpRequest.sendPost(parseCorrectUrl(url), paramJson.toString());
+		// String response = TNHttpUtils.doPost(parseCorrectUrl(url), paramJson, 5000, 10000);
 		System.out.println("response: " + response);// 解密后的明文
 	}
 

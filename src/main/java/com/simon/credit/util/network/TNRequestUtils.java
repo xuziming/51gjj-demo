@@ -2,11 +2,9 @@ package com.simon.credit.util.network;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
 import com.simon.credit.util.codec.Base64;
 import com.simon.credit.util.rsa.RSAUtils;
 
