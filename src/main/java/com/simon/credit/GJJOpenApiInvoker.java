@@ -36,8 +36,8 @@ public class GJJOpenApiInvoker {
 
 		paramJson.put("f"			, "load_apply_ext_info");
 		paramJson.put("product_cid"	, "132");
-		paramJson.put("apply_id"	, "5E74977B-3101-5149-92F4-00B53606DE6D");
-		paramJson.put("type"		, "ORDER");
+		paramJson.put("apply_id"	, "361706398");
+		paramJson.put("type"		, "GJJ");
 		paramJson.put("time"		, "2019-04-12 10:00:00");
 
 		// 3.1 获取订单额外信息接口
