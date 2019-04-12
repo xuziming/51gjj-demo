@@ -65,12 +65,11 @@ public class GJJOpenApiInvoker {
 
 		// 3.1 获取订单额外信息接口
 		// String url  = "https://kaifa.jianbing.com/api/apiBusiness.php";
-		String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.loadApplyExtInfo";
-		// String url  = "https://openapitest.to$$un$$a.cn/gateway/gjj/gjj.credit.loadApplyExtInfo";
+		// String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.loadApplyExtInfo";
+		String url  = "https://openapitest.to$$un$$a.cn/gateway/gjj/gjj.credit.loadApplyExtInfo";
 
 		// 发送请求
 		String response = HttpRequest.sendPost(parseCorrectUrl(url), paramJson.toString());
-		// String response = TNHttpUtils.doPost(parseCorrectUrl(url), paramJson, 5000, 10000);
 		System.out.println("response: " + response);// 解密后的明文
 	}
 
