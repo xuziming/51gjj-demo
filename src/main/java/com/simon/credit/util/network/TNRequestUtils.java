@@ -94,12 +94,13 @@ public class TNRequestUtils {
 	public static JSONObject tnSendRequest(String url, JSONObject paramJSON) throws Exception {
 		JSONObject requestParam = tnEncodeParam(paramJSON);
 		// TODO 此处值为示例，具体值由51公积金提供
-		requestParam.put("product_cid", "3");
+		requestParam.put("product_cid", "132");
 		System.out.println("请求JSON：" + requestParam);
+		String response = HttpRequest.sendPost(url, requestParam.toString());
 
-		Map<String, String> params = JSON.parseObject(requestParam.toJSONString(), new TypeReference<Map<String, String>>() {});
+		// Map<String, String> params = JSON.parseObject(requestParam.toJSONString(), new TypeReference<Map<String, String>>() {});
 		// String response = HttpUtil.doPost(url, params, 5000, 10000);
-		String response = TNHttpUtils.doPost(url, params, 5000, 10000);
+		// String response = TNHttpUtils.doPost(url, params, 5000, 10000);
 		System.out.println("响应字符串：" + response);
 
 		// 获取响应入参 JSONObject

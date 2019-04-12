@@ -19,7 +19,7 @@ public class GJJOpenApiInvoker {
 	public static void main(String[] args) throws Exception {
 		// 3.1 获取订单额外信息接口
 		testGjjApiLoadApplyExtInfoMethod1();
-		testGjjApiLoadApplyExtInfoMethod2();
+		// testGjjApiLoadApplyExtInfoMethod2();
 	}
 
 	/**
@@ -37,16 +37,14 @@ public class GJJOpenApiInvoker {
 		paramJson.put("f"			, "load_apply_ext_info");
 		paramJson.put("product_cid"	, "132");
 		paramJson.put("apply_id"	, "5E74977B-3101-5149-92F4-00B53606DE6D");
-		paramJson.put("type"		, "GJJ");
-		paramJson.put("time"		, "2019-04-09 10:00:00");
+		paramJson.put("type"		, "ORDER");
+		paramJson.put("time"		, "2019-04-12 10:00:00");
 
 		// 3.1 获取订单额外信息接口
-		// String url  = "https://kaifa.jianbing.com/api/apiBusiness.php";
-		// String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.loadApplyExtInfo";
-		String url  = "https://openapitest.to$$un$$a.cn/gateway/gjj/gjj.credit.loadApplyExtInfo";
+		String url  = "https://kaifa.jianbing.com/api/apiBusiness.php";
 
 		// 发送请求
-		JSONObject response = TNRequestUtils.tnSendRequest(parseCorrectUrl(url), paramJson);
+		JSONObject response = TNRequestUtils.tnSendRequest(url, paramJson);
 		System.out.println("response: " + response);// 解密后的明文
 	}
 
@@ -59,7 +57,7 @@ public class GJJOpenApiInvoker {
 	 * @throws IOException
 	 */
 	public static void testGjjApiLoadApplyExtInfoMethod2() throws Exception {
-		Map<String, String> paramJson = new HashMap<String, String>();
+		Map<String, String> paramJson = new HashMap<String, String>(8);
 
 		paramJson.put("f"			, "load_apply_ext_info");
 		paramJson.put("product_cid"	, "132");
