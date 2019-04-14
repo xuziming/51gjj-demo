@@ -60,7 +60,13 @@ public class GJJOpenApiInvoker {
 		paramJson.put("f"			, "load_apply_ext_info");
 		paramJson.put("product_cid"	, "132");
 		paramJson.put("apply_id"	, "361706398");
-		paramJson.put("type"		, "GJJ");
+//		paramJson.put("type"		, "GJJ");
+//		paramJson.put("type"		, "ORDER");
+		paramJson.put("type"		, "USER");
+//		paramJson.put("type"		, "IMAGE");
+//		paramJson.put("type"		, "FACE_INFO");
+//		paramJson.put("type"		, "SHEBAO");
+//		paramJson.put("type"		, "HOLD_IMAGE");
 		paramJson.put("time"		, "2019-04-12 10:00:00");
 
 		// 3.1 获取订单额外信息接口

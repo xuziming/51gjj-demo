@@ -14,7 +14,7 @@ public class TNOpenApiInvoker {
 
 	public static void main(String[] args) throws Exception {
 		// 2.1 前置检测接口
-		// testGjjCreditCheckUser();
+		testGjjCreditCheckUser();
 
 		// 2.9.2 获取合作方还款页面URL接口
 		testGetRepayUrl();
@@ -41,9 +41,10 @@ public class TNOpenApiInvoker {
 		paramJson.put("phone_id_md5", "46415fb12f05f96cf9e8956ceebb07b2");
 
 		// 2.1前置检测接口(开放平台必须配置开放服务method: gjj.credit.checkUser, 否则会报参数异常)
-		// String url  = "https://openapitest.to$$u$$na.cn/gateway/gjj/gjj.credit.checkUser";
+		String url  = "https://openapitest.to$$u$$na.cn/gateway/gjj/gjj.credit.checkUser";
 		// String url  = "http://10.0.4.137:8443/gateway/gjj/gjj.credit.checkUser";
-		String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.checkUser";
+		// String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.checkUser";
+		// String url  = "http://127.0.0.1:8080/gateway/gjj/gjj.credit.checkUser";
 
 		// 发送请求
 		JSONObject response = GjjRequestUtils.sendRequest(parseCorrectUrl(url), paramJson);
@@ -67,9 +68,9 @@ public class TNOpenApiInvoker {
 		paramJson.put("return_url"	, "https://kaifa.jianbing.com/pt?apply_id=1111&loan_no=2222");
 
 		// 2.12.9.2获取合作方还款页面URL接口(开放平台必须配置开放服务method: gjj.credit.getRepayUrl, 否则会报参数异常)
-		// String url  = "https://openapitest.to$$u$$na.cn/gateway/gjj/gjj.credit.getRepayUrl";
+		String url  = "https://openapitest.to$$u$$na.cn/gateway/gjj/gjj.credit.getRepayUrl";
 		// String url  = "http://10.0.4.137:8443/gateway/gjj/gjj.credit.getRepayUrl";
-		String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.getRepayUrl";
+		// String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.getRepayUrl";
 		// String url  = "http://127.0.0.1:8080/gateway/gjj/gjj.credit.getRepayUrl";
 
 		// 发送请求
