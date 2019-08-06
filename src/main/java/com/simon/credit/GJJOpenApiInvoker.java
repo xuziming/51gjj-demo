@@ -126,7 +126,7 @@ public class GJJOpenApiInvoker {
 		// 3.1 获取订单额外信息接口
 		// String url  = "https://kaifa.jianbing.com/api/apiBusiness.php";
 		// String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.loadApplyExtInfo";
-		String url  = "https://preopenapi.touna.cn:8080/gateway/gjj/gjj.credit.loadApplyExtInfo";
+		String url  = "https://preopenapi.to$$u$$na.cn:8080/gateway/gjj/gjj.credit.loadApplyExtInfo";
 		// String url  = "https://openapitest.to$$un$$a.cn/gateway/gjj/gjj.credit.loadApplyExtInfo";
 
 		// 发送请求

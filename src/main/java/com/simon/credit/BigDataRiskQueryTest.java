@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
+import com.simon.credit.util.lang.StringUtils;
 import com.simon.credit.util.network.HttpUtils;
 
 /**
@@ -14,12 +15,12 @@ public class BigDataRiskQueryTest {
 
 	public static void main(String[] argss) {
 		String url = "http://10.0.4.149:8082/openApiDispatcher";
-		// "openApiMethod":"touna.bigdata.risk.query","openApiVersion":"1.0"}
+		// "openApiMethod":"to$$u$$na.bigdata.risk.query","openApiVersion":"1.0"}
 
 		// 业务参数
 		Map<String, String> oparams = new HashMap<String, String>(16);
 		oparams.put("application"	, "bigdata"					);
-		oparams.put("openApiMethod" , "touna.bigdata.risk.query");
+		oparams.put("openApiMethod" , parseCorrectUrl("to$$u$$na.bigdata.risk.query"));
 		oparams.put("openApiVersion", "1.0"						);
 
 		// 业务参数
@@ -42,6 +43,10 @@ public class BigDataRiskQueryTest {
 
 		String resp = HttpUtils.jsonPost(url, JSON.toJSONString(oparams));
 		System.out.println(resp);
+	}
+
+	private static String parseCorrectUrl(String url) {
+		return StringUtils.replace(url, "$$", "");
 	}
 
 }

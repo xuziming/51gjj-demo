@@ -1,7 +1,3 @@
-/**
- * Touna.com Inc.
- * Copyright (c) 2012-2017 All Rights Reserved.
- */
 package com.simon.credit.util;
 
 import java.util.HashMap;
@@ -13,10 +9,7 @@ import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.serializer.NameFilter;
 
 /**
- * Json工具类
- * 
- * @author zhuguo.hezg
- * @version $Id: JsonUtil.java, v 0.1 2017年8月15日 上午11:38:48 zhuguo.hezg Exp $
+ * JSON工具类
  */
 public class JsonUtil {
 

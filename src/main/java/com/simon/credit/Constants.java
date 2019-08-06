@@ -1,22 +1,13 @@
-/**
- * Touna.com Inc.
- * Copyright (c) 2012-2017 All Rights Reserved.
- */
 package com.simon.credit;
 
 /**
  * 常量
- * 
- * @author zhuguo.hezg
- * @version $Id: Constants.java, v 0.1 2017年9月5日 下午1:07:51 zhuguo.hezg Exp $
  */
 public class Constants {
 
     public static final String SIGN_TYPE_RSA             = "RSA";
 
-    /**
-     * sha256WithRsa 算法请求类型
-     */
+    /** sha256WithRsa 算法请求类型 */
     public static final String SIGN_TYPE_RSA2            = "RSA2";
 
     public static final String SIGN_ALGORITHMS           = "SHA1WithRSA";

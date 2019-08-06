@@ -63,7 +63,7 @@ public class TNOpenApiInvoker {
 		paramJson.put("periods"	, "24"			  );
 
 		// 2.1前置检测接口(开放平台必须配置开放服务method: gjj.credit.checkUser, 否则会报参数异常)
-		String url  = "https://openapi.touna.cn:8080/gateway/gjj/gjj.credit.preRepayPlan";
+		String url  = "https://openapi.to$$u$$na.cn:8080/gateway/gjj/gjj.credit.preRepayPlan";
 
 		// 发送请求
 		JSONObject response = requestWithoutEncrypt(parseCorrectUrl(url), paramJson);
@@ -101,9 +101,9 @@ public class TNOpenApiInvoker {
 		System.out.println("=== decryptText: " + decryptText);
 
 		// 车轮黑名单检测
-		// String url  = "https://openapitest.touna.cn/gateway/chelun/touna.bigdata.risk.query";
-		String url  = "https://openapi.touna.cn:8080/gateway/chelun/touna.bigdata.risk.query";
-		String response = HttpUtils.jsonPost(url, encryptText);
+		// String url  = "https://openapitest.to$$u$$na.cn/gateway/chelun/to$$u$$na.bigdata.risk.query";
+		String url  = "https://openapi.to$$u$$na.cn:8080/gateway/chelun/to$$u$$na.bigdata.risk.query";
+		String response = HttpUtils.jsonPost(parseCorrectUrl(url), encryptText);
 		System.out.println(response);
 	}
 
@@ -195,8 +195,8 @@ public class TNOpenApiInvoker {
 
 		// 2.1前置检测接口(开放平台必须配置开放服务method: gjj.credit.apply, 否则会报参数异常)
 		// String url  = "https://openapitest.to$$u$$na.cn/gateway/gjj/gjj.credit.apply";
-		// String url  = "https://preopenapi.touna.cn:8080/gateway/gjj/gjj.credit.apply";
-		String url  = "https://openapi.touna.cn:8080/gateway/gjj/gjj.credit.apply";
+		// String url  = "https://preopenapi.to$$u$$na.cn:8080/gateway/gjj/gjj.credit.apply";
+		String url  = "https://openapi.to$$u$$na.cn:8080/gateway/gjj/gjj.credit.apply";
 		// String url  = "http://10.0.4.137:8443/gateway/gjj/gjj.credit.apply";
 		// String url  = "http://127.0.0.1:8443/gateway/gjj/gjj.credit.apply";
 		// String url  = "http://127.0.0.1:8080/gateway/gjj/gjj.credit.apply";
@@ -217,7 +217,7 @@ public class TNOpenApiInvoker {
 
 		// 2.1前置检测接口(开放平台必须配置开放服务method: gjj.credit.apply, 否则会报参数异常)
 		// String url  = "https://openapitest.to$$u$$na.cn/gateway/gjj/gjj.credit.apply";
-		String url  = "https://preopenapi.touna.cn:8080/gateway/gjj/gjj.credit.queryRepayDetail";
+		String url  = "https://preopenapi.to$$u$$na.cn:8080/gateway/gjj/gjj.credit.queryRepayDetail";
 
 		// 发送请求
 		// JSONObject response = OpenApiUtils.gjjSendRequest(parseCorrectUrl(url), paramJson);
