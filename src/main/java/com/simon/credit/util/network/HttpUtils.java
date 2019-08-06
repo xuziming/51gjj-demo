@@ -5,14 +5,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -31,7 +34,7 @@ import com.simon.credit.util.lang.StringUtils;
 /**
  * HTTP工具类
  */
-public class TNHttpUtils {
+public class HttpUtils {
 
     private static final String     DEFAULT_CHARSET = "UTF8";
     private static final String     METHOD_POST     = "POST";
@@ -44,20 +47,14 @@ public class TNHttpUtils {
     private static SSLSocketFactory SOCKET_FACTORY  = null;
 
     static {
-
         try {
             SSL_CONTEXT = SSLContext.getInstance("TLS");
             SSL_CONTEXT.init(new KeyManager[0], new TrustManager[] { new X509TrustManager() {
+                @Override
+                public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {}
 
                 @Override
-                public void checkClientTrusted(X509Certificate[] arg0,
-                                               String arg1) throws CertificateException {
-                }
-
-                @Override
-                public void checkServerTrusted(X509Certificate[] arg0,
-                                               String arg1) throws CertificateException {
-                }
+                public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {}
 
                 @Override
                 public X509Certificate[] getAcceptedIssuers() {
@@ -82,8 +79,7 @@ public class TNHttpUtils {
 
     }
 
-    private TNHttpUtils() {
-    }
+    private HttpUtils() {}
 
     /**
      * 执行HTTP POST请求。
@@ -93,8 +89,7 @@ public class TNHttpUtils {
      * @return 响应字符串
      * @throws IOException
      */
-    public static String doPost(String url, Map<String, String> params, int connectTimeout,
-                                int readTimeout) throws IOException {
+    public static String doPost(String url, Map<String, String> params, int connectTimeout, int readTimeout) throws IOException {
         return doPost(url, params, DEFAULT_CHARSET, connectTimeout, readTimeout);
     }
 
@@ -107,8 +102,7 @@ public class TNHttpUtils {
      * @return 响应字符串
      * @throws IOException
      */
-    public static String doPost(String url, Map<String, String> params, String charset,
-                                int connectTimeout, int readTimeout) throws IOException {
+    public static String doPost(String url, Map<String, String> params, String charset, int connectTimeout, int readTimeout) throws IOException {
         String ctype = "application/x-www-form-urlencoded;charset=" + charset;
         String content = buildQuery(params, charset);
         return doPost(url, ctype, content, charset, connectTimeout, readTimeout);
@@ -123,8 +117,7 @@ public class TNHttpUtils {
      * @return 响应字符串
      * @throws IOException
      */
-    public static String doPost(String url, String ctype, String content, String charset,
-                                int connectTimeout, int readTimeout) throws IOException {
+    public static String doPost(String url, String ctype, String content, String charset, int connectTimeout, int readTimeout) throws IOException {
         HttpURLConnection conn = null;
         OutputStream out = null;
         String rsp = null;
@@ -144,9 +137,7 @@ public class TNHttpUtils {
         	e.printStackTrace();
             throw e;
         } finally {
-            if (out != null) {
-                out.close();
-            }
+        	closeQuietly(out);
             if (conn != null) {
                 conn.disconnect();
             }
@@ -176,8 +167,7 @@ public class TNHttpUtils {
      * @return 响应字符串
      * @throws IOException
      */
-    public static String doGet(String url, Map<String, String> params,
-                               String charset) throws IOException {
+    public static String doGet(String url, Map<String, String> params, String charset) throws IOException {
         HttpURLConnection conn = null;
         String rsp = null;
         try {
@@ -196,8 +186,7 @@ public class TNHttpUtils {
         return rsp;
     }
 
-    private static HttpURLConnection getConnection(URL url, String method,
-                                                   String ctype) throws IOException {
+    private static HttpURLConnection getConnection(URL url, String method, String ctype) throws IOException {
         HttpURLConnection conn = null;
         if ("https".equals(url.getProtocol())) {
             HttpsURLConnection connHttps = (HttpsURLConnection) url.openConnection();
@@ -295,9 +284,7 @@ public class TNHttpUtils {
 
             return writer.toString();
         } finally {
-            if (stream != null) {
-                stream.close();
-            }
+        	closeQuietly(stream);
         }
     }
 
@@ -380,5 +367,105 @@ public class TNHttpUtils {
         }
         return result;
     }
+
+    /**
+	 * 向指定URL发送GET方法的请求
+	 * @param url 发送请求的URL
+	 * @param param 请求参数(JSON格式)
+	 * @return URL 所代表远程资源的响应结果
+	 */
+	public static String jsonGet(String url, String param) {
+		String result = "";
+		BufferedReader in = null;
+		try {
+			String urlNameString = url + "?" + param;
+			URL realUrl = new URL(urlNameString);
+			// 打开和URL之间的连接
+			URLConnection connection = realUrl.openConnection();
+			// 设置通用的请求属性
+			// connection.setRequestProperty("accept", "*/*");
+			// connection.setRequestProperty("connection", "Keep-Alive");
+			// connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+			// 建立实际的连接
+			connection.connect();
+			// 获取所有响应头字段
+			Map<String, List<String>> map = connection.getHeaderFields();
+			// 遍历所有的响应头字段
+			for (String key : map.keySet()) {
+				System.out.println(key + "--->" + map.get(key));
+			}
+			// 定义 BufferedReader输入流来读取URL的响应
+			in = new BufferedReader(new InputStreamReader(
+					connection.getInputStream()));
+			String line;
+			while ((line = in.readLine()) != null) {
+				result += line;
+			}
+		} catch (Exception e) {
+			System.out.println("发送GET请求出现异常！" + e);
+			e.printStackTrace();
+		}
+		// 使用finally块来关闭输入流
+		finally {
+			closeQuietly(in);
+		}
+		return result;
+	}
+
+	/**
+	 * 向指定 URL 发送POST方法的请求
+	 * @param url 发送请求的 URL
+	 * @param param 请求参数(JSON格式)
+	 * @return 所代表远程资源的响应结果
+	 */
+	public static String jsonPost(String url, String param) {
+		PrintWriter out = null;
+		BufferedReader in = null;
+		String result = "";
+		try {
+			URL realUrl = new URL(url);
+			// 打开和URL之间的连接
+			URLConnection conn = realUrl.openConnection();
+			// 设置通用的请求属性
+			conn.setRequestProperty("accept", "*/*");
+			conn.setRequestProperty("connection", "Keep-Alive");
+			conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+			conn.setRequestProperty("Content-Type", "applicaton/json");
+			// 发送POST请求必须设置如下两行
+			conn.setDoOutput(true);
+			conn.setDoInput(true);
+			// 获取URLConnection对象对应的输出流
+			out = new PrintWriter(conn.getOutputStream());
+			// 发送请求参数
+			out.print(param);
+			// flush输出流的缓冲
+			out.flush();
+			// 定义BufferedReader输入流来读取URL的响应
+			in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line;
+			while ((line = in.readLine()) != null) {
+				result += line;
+			}
+		} catch (Exception e) {
+			System.out.println("发送 POST 请求出现异常！" + e);
+			e.printStackTrace();
+		} finally {// 使用finally块来关闭输出流、输入流
+			closeQuietly(out);
+			closeQuietly(in);
+		}
+
+		return result;
+	}
+
+	public static final void closeQuietly(AutoCloseable resource) {
+		if (resource == null) {
+			return;
+		}
+		try {
+			resource.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
