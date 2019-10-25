@@ -29,11 +29,6 @@ public class JsonUtil {
     }
 
     public static class SnakeNameFilter implements NameFilter {
-
-        /** 
-         * @see com.alibaba.fastjson.serializer.NameFilter#process(java.lang.Object, java.lang.String, java.lang.Object)
-         */
-        @Override
         public String process(Object object, String name, Object value) {
             return PropertyNamingStrategy.SnakeCase.translate(name);
         }
@@ -41,11 +36,6 @@ public class JsonUtil {
     }
 
     public static class CamelNameFilter implements NameFilter {
-
-        /** 
-         * @see com.alibaba.fastjson.serializer.NameFilter#process(java.lang.Object, java.lang.String, java.lang.Object)
-         */
-        @Override
         public String process(Object object, String name, Object value) {
             return PropertyNamingStrategy.CamelCase.translate(name);
         }
@@ -53,11 +43,6 @@ public class JsonUtil {
     }
 
     public static class PascalNameFilter implements NameFilter {
-
-        /** 
-         * @see com.alibaba.fastjson.serializer.NameFilter#process(java.lang.Object, java.lang.String, java.lang.Object)
-         */
-        @Override
         public String process(Object object, String name, Object value) {
             return PropertyNamingStrategy.PascalCase.translate(name);
         }
@@ -65,11 +50,6 @@ public class JsonUtil {
     }
 
     public static class KebabNameFilter implements NameFilter {
-
-        /** 
-         * @see com.alibaba.fastjson.serializer.NameFilter#process(java.lang.Object, java.lang.String, java.lang.Object)
-         */
-        @Override
         public String process(Object object, String name, Object value) {
             return PropertyNamingStrategy.KebabCase.translate(name);
         }
